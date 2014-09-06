@@ -31,7 +31,7 @@
 		</div>
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
-		<script src="js/OBJLoader.js"></script>
+		<script src="js/STLLoader.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/stats.min.js"></script>
@@ -94,23 +94,26 @@
 
 				// model
 
-				var loader = new THREE.OBJLoader( manager );
-				loader.load( 'male02.obj', function ( object ) {
+				var material = new THREE.MeshPhongMaterial( { ambient: 0x555555, color: 0xAAAAAA, specular: 0x111111, shininess: 200 } );
 
-					object.traverse( function ( child ) {
+				var loader = new THREE.STLLoader();
+				loader.addEventListener( 'load', function ( event ) {
 
-						if ( child instanceof THREE.Mesh ) {
+					var geometry = event.content;
+					var mesh = new THREE.Mesh( geometry, material );
 
-							child.material.map = texture;
+					mesh.position.set( 0, - 0.37, - 0.6 );
+					mesh.rotation.set( - Math.PI / 2, 0, 0 );
+					mesh.scale.set( 2, 2, 2 );
 
-						}
+					mesh.castShadow = true;
+					mesh.receiveShadow = true;
 
-					} );
-
-					object.position.y = - 80;
-					scene.add( object );
+					scene.add( mesh );
 
 				} );
+				// http://www.thingiverse.com/thing:331035/#files
+				loader.load( './Robot_Maker_Faire_65pc.stl' );
 
 				//
 
@@ -141,6 +144,7 @@
 
 			function onGyro( obj ) {
 
+				// http://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 				mouseX = -3 * obj.gamma;
 				mouseY = -3 * obj.beta;
 
