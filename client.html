@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <title>JS Bin</title>
     <script src="https://rawgithub.com/tomgco/gyro.js/master/js/gyro.js" type="text/javascript"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
+      var socket = io();
       gyro.startTracking(function(o) {
         // o.x, o.y, o.z for accelerometer
         // o.alpha, o.beta, o.gamma for gyro
         document.body.innerHTML = JSON.stringify(o);
+        socket.emit('gyro', o);
       });
     </script>
   </head>
