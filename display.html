@@ -66,12 +66,16 @@
 
 				scene = new THREE.Scene();
 
-				var ambient = new THREE.AmbientLight( 0x101030 );
+				var ambient = new THREE.AmbientLight( 0x777777 );
 				scene.add( ambient );
 
-				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-				directionalLight.position.set( 0, 0, 1 );
-				scene.add( directionalLight );
+				var directionalLight1 = new THREE.DirectionalLight( 0xffeedd );
+				directionalLight1.position.set( 0, 0, 1 );
+				scene.add( directionalLight1 );
+
+				var directionalLight2 = new THREE.DirectionalLight( 0xffeedd );
+				directionalLight2.position.set( 0, 1, 0 );
+				scene.add( directionalLight2 );
 
 				// texture
 
