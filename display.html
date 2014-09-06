@@ -36,6 +36,8 @@
 		<script src="js/Detector.js"></script>
 		<script src="js/stats.min.js"></script>
 
+		<script src="/socket.io/socket.io.js"></script>
+
 		<script>
 
 			var container, stats;
@@ -116,7 +118,8 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				var socket = io();
+				socket.on('gyro', onGyro);
 
 				//
 
@@ -136,10 +139,10 @@
 
 			}
 
-			function onDocumentMouseMove( event ) {
+			function onGyro( obj ) {
 
-				mouseX = ( event.clientX - windowHalfX ) / 2;
-				mouseY = ( event.clientY - windowHalfY ) / 2;
+				mouseX = -1 * obj.rawGamma;
+				mouseY = -1 * obj.rawBeta;
 
 			}
 

@@ -10,6 +10,7 @@ io.on('connection', function(socket){
 
   socket.on('gyro', function(msg){
     console.log(msg);
+    io.emit('gyro', msg);
   });
 
   socket.on('disconnect', function(){
