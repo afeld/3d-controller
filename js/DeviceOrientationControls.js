@@ -16,18 +16,13 @@ THREE.DeviceOrientationControls = function ( object ) {
 	this.freeze = true;
 
 	this.deviceOrientation = {};
-
 	this.screenOrientation = 0;
+
+	var socket = io();
 
 	var onDeviceOrientationChangeEvent = function ( event ) {
 
 		scope.deviceOrientation = event;
-
-	};
-
-	var onScreenOrientationChangeEvent = function () {
-
-		scope.screenOrientation = window.orientation || 0;
 
 	};
 
@@ -59,10 +54,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 	this.connect = function() {
 
-		onScreenOrientationChangeEvent(); // run once on load
-
-		window.addEventListener( 'orientationchange', onScreenOrientationChangeEvent, false );
-		window.addEventListener( 'deviceorientation', onDeviceOrientationChangeEvent, false );
+		socket.on('gyro', onDeviceOrientationChangeEvent);
 
 		scope.freeze = false;
 
@@ -72,8 +64,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 		scope.freeze = true;
 
-		window.removeEventListener( 'orientationchange', onScreenOrientationChangeEvent, false );
-		window.removeEventListener( 'deviceorientation', onDeviceOrientationChangeEvent, false );
+		// TODO remove gyro listener
 
 	};
 

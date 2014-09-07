@@ -32,6 +32,7 @@
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
 		<script src="js/STLLoader.js"></script>
+		<script src="js/DeviceOrientationControls.js"></script>
 
 		<script src="js/Detector.js"></script>
 		<script src="js/stats.min.js"></script>
@@ -42,7 +43,7 @@
 
 			var container, stats;
 
-			var camera, scene, renderer, mesh, deviceOrientation;
+			var camera, scene, renderer, mesh, controls;
 
 			init();
 			animate();
@@ -108,6 +109,9 @@
 					mesh.castShadow = true;
 					mesh.receiveShadow = true;
 
+					controls = new THREE.DeviceOrientationControls(mesh);
+					controls.connect();
+
 					scene.add( mesh );
 
 				} );
@@ -119,9 +123,6 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
-
-				var socket = io();
-				socket.on('gyro', onGyro);
 
 				//
 
@@ -138,13 +139,6 @@
 
 			}
 
-			function onGyro( obj ) {
-
-				// http://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
-				deviceOrientation = obj;
-
-			}
-
 			//
 
 			function animate() {
@@ -156,12 +150,8 @@
 
 			function render() {
 
-				if (deviceOrientation && mesh) {
-					var alpha  = deviceOrientation.alpha ? THREE.Math.degToRad( deviceOrientation.alpha ) : 0; // Z
-					var beta   = deviceOrientation.beta  ? THREE.Math.degToRad( deviceOrientation.beta  ) : 0; // X'
-					var gamma  = deviceOrientation.gamma ? THREE.Math.degToRad( deviceOrientation.gamma ) : 0; // Y''
-
-					mesh.rotation.set( beta - (Math.PI / 2), gamma, alpha );
+				if (controls) {
+					controls.update();
 				}
 
 				camera.lookAt( scene.position );
