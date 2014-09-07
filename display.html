@@ -161,7 +161,7 @@
 					var beta   = deviceOrientation.beta  ? THREE.Math.degToRad( deviceOrientation.beta  ) : 0; // X'
 					var gamma  = deviceOrientation.gamma ? THREE.Math.degToRad( deviceOrientation.gamma ) : 0; // Y''
 
-					mesh.rotation.set( beta - (Math.PI / 2), alpha, gamma, 'YXZ' );
+					mesh.rotation.set( beta - (Math.PI / 2), gamma, alpha );
 				}
 
 				camera.lookAt( scene.position );
