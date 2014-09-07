@@ -22,6 +22,34 @@
         document.body.innerHTML = '<pre><code>' + JSON.stringify(obj, null, 2) + '</code></pre>';
         socket.emit('gyro', obj);
       }, false);
+
+      var lastTouchMove = null;
+      document.addEventListener('touchend', function(event){
+        lastTouchMove = null;
+      }, false);
+
+      document.addEventListener('touchmove', function(event){
+        var touch = event.changedTouches[0];
+        if (lastTouchMove) {
+          var lastTouch = lastTouchMove.touches[0];
+          if (lastTouch.identifier === touch.identifier) {
+            var dx = event.pageX - lastTouchMove.pageX;
+            var dy = event.pageY - lastTouchMove.pageY;
+
+            if (dx || dy) {
+              var drag = {
+                dx: dx,
+                dy: dy
+              };
+              socket.emit('drag', drag);
+            }
+          }
+        }
+
+        lastTouchMove = event;
+        // don't scroll
+        event.preventDefault();
+      }, false);
     </script>
   </head>
   <body>

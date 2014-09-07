@@ -12,6 +12,10 @@ io.on('connection', function(socket){
     socket.broadcast.emit('gyro', msg);
   });
 
+  socket.on('drag', function(msg){
+    socket.broadcast.emit('drag', msg);
+  });
+
   socket.on('disconnect', function(){
     console.log('user disconnected');
   });
