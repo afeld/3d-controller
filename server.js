@@ -9,7 +9,7 @@ io.on('connection', function(socket){
   console.log('a user connected');
 
   socket.on('gyro', function(msg){
-    io.emit('gyro', msg);
+    socket.broadcast.emit('gyro', msg);
   });
 
   socket.on('disconnect', function(){
