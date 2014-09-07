@@ -144,9 +144,8 @@
 
 			function onDragEvent(event) {
 				if (mesh) {
-					console.log(event);
-					var scalar = - event.dy / 80;
-					mesh.scale.addScalar(scalar);
+					var scalar = 1 - event.dy / 80;
+					mesh.scale.multiplyScalar(scalar);
 				}
 			}
 
