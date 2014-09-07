@@ -23,19 +23,24 @@
         socket.emit('gyro', obj);
       }, false);
 
+
       var lastTouchMove = null;
+
       document.addEventListener('touchend', function(event){
         lastTouchMove = null;
       }, false);
 
-      document.addEventListener('touchmove', function(event){
-        var touch = event.changedTouches[0];
+      var handleSingleDrag = function(event){
         if (lastTouchMove) {
           var lastTouch = lastTouchMove.touches[0];
+          var touch = event.touches[0];
+
+          // double-check that it's the same touch
           if (lastTouch.identifier === touch.identifier) {
             var dx = event.pageX - lastTouchMove.pageX;
             var dy = event.pageY - lastTouchMove.pageY;
 
+            // check if it actually moved
             if (dx || dy) {
               var drag = {
                 dx: dx,
@@ -44,6 +49,14 @@
               socket.emit('drag', drag);
             }
           }
+        }
+      };
+
+      document.addEventListener('touchmove', function(event){
+        if (event.touches.length === 1) {
+          handleSingleDrag(event);
+        } else {
+          console.log('multi');
         }
 
         lastTouchMove = event;
