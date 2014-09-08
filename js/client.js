@@ -8,7 +8,7 @@ $(window).on('deviceorientation', function(jqEvent) {
     gamma: event.gamma
   };
 
-  // $('.output').html('<pre><code>' + JSON.stringify(obj, null, 2) + '</code></pre>');
+  // $('.output').text(JSON.stringify(obj, null, 2));
   socket.emit('gyro', obj);
 });
 

@@ -109,6 +109,10 @@ function pan(event) {
   var dx = event.dx * scalar;
   var dy = -1 * event.dy * scalar;
   var v = new THREE.Vector3(dx, dy, 0);
+
+  // apply pan relative to rotation of model
+  v.applyQuaternion(mesh.quaternion);
+
   mesh.position.add(v);
 }
 
