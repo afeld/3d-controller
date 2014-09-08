@@ -43,8 +43,8 @@
       var handleSingleDrag = function(event){
         var touch = event.touches[0];
         if (lastX) {
-          var dx = touch.pageX - lastX;
-          var dy = touch.pageY - lastY;
+          var dx = touch.screenX - lastX;
+          var dy = touch.screenY - lastY;
 
           // check if it actually moved
           if (dx || dy) {
@@ -56,8 +56,8 @@
           }
         }
 
-        lastX = touch.pageX;
-        lastY = touch.pageY;
+        lastX = touch.screenX;
+        lastY = touch.screenY;
       };
 
       document.addEventListener('touchmove', function(event){
