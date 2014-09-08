@@ -14,12 +14,10 @@ $(window).on('deviceorientation', function(jqEvent) {
 
 
 $(function(){
-  var lastX = null;
-  var lastY = null;
+  var lastPosByTouchId;
 
   var resetLast = function() {
-    lastX = null;
-    lastY = null;
+    lastPosByTouchId = {}
   };
 
   var $doc = $(document);
@@ -27,9 +25,10 @@ $(function(){
   resetLast();
 
   var handleDrag = function(touch, type){
-    if (lastX) {
-      var dx = touch.screenX - lastX;
-      var dy = touch.screenY - lastY;
+    var lastPos = lastPosByTouchId[touch.identifier];
+    if (lastPos) {
+      var dx = touch.screenX - lastPos.x;
+      var dy = touch.screenY - lastPos.y;
 
       // check if it actually moved
       if (dx || dy) {
@@ -43,16 +42,23 @@ $(function(){
     }
   };
 
+  var zoomWidth = $('.zoom').width();
+
   $doc.on('touchmove', function(event){
-    var touches = event.originalEvent.touches;
-    var touch = touches[0];
-    var $target = $(event.target);
-    var type = $target.attr('class');
+    $.each(event.originalEvent.changedTouches, function(i, touch) {
+      if (touch.clientX > zoomWidth) {
+        handleDrag(touch, 'pan');
+      } else {
+        handleDrag(touch, 'zoom');
+      }
+    });
 
-    handleDrag(touch, type);
-
-    lastX = touch.screenX;
-    lastY = touch.screenY;
+    $.each(event.originalEvent.touches, function(i, touch) {
+      lastPosByTouchId[touch.identifier] = {
+        x: touch.screenX,
+        y: touch.screenY
+      };
+    });
 
     // don't scroll
     event.preventDefault();
