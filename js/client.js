@@ -8,51 +8,53 @@ $(window).on('deviceorientation', function(jqEvent) {
     gamma: event.gamma
   };
 
-  $(document.body).html('<pre><code>' + JSON.stringify(obj, null, 2) + '</code></pre>');
+  // $('.output').html('<pre><code>' + JSON.stringify(obj, null, 2) + '</code></pre>');
   socket.emit('gyro', obj);
 });
 
 
-var lastX = null;
-var lastY = null;
+$(function(){
+  var lastX = null;
+  var lastY = null;
 
-var resetLast = function() {
-  lastX = null;
-  lastY = null;
-};
+  var resetLast = function() {
+    lastX = null;
+    lastY = null;
+  };
 
-var $doc = $(document);
-$doc.on('touchend', resetLast);
-resetLast();
+  var $doc = $(document);
+  $doc.on('touchend', resetLast);
+  resetLast();
 
-var handleSingleDrag = function(touch){
-  if (lastX) {
-    var dx = touch.screenX - lastX;
-    var dy = touch.screenY - lastY;
+  var handleDrag = function(touch, type){
+    if (lastX) {
+      var dx = touch.screenX - lastX;
+      var dy = touch.screenY - lastY;
 
-    // check if it actually moved
-    if (dx || dy) {
-      var drag = {
-        dx: dx,
-        dy: dy
-      };
-      socket.emit('drag', drag);
+      // check if it actually moved
+      if (dx || dy) {
+        var drag = {
+          dx: dx,
+          dy: dy,
+          type: type
+        };
+        socket.emit('drag', drag);
+      }
     }
-  }
-};
+  };
 
-$doc.on('touchmove', function(event){
-  var touches = event.originalEvent.touches;
-  var touch = touches[0];
-  if (touches.length === 1) {
-    handleSingleDrag(touch);
-  } else {
-    console.log('multi');
-  }
+  $doc.on('touchmove', function(event){
+    var touches = event.originalEvent.touches;
+    var touch = touches[0];
+    var $target = $(event.target);
+    var type = $target.attr('class');
 
-  lastX = touch.screenX;
-  lastY = touch.screenY;
+    handleDrag(touch, type);
 
-  // don't scroll
-  event.preventDefault();
+    lastX = touch.screenX;
+    lastY = touch.screenY;
+
+    // don't scroll
+    event.preventDefault();
+  });
 });

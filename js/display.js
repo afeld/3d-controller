@@ -99,10 +99,26 @@ function onWindowResize() {
 
 }
 
+function scale(event) {
+  var scalar = 1 - event.dy / 80;
+  mesh.scale.multiplyScalar(scalar);
+}
+
+function pan(event) {
+  var scalar = 2;
+  var dx = event.dx * scalar;
+  var dy = -1 * event.dy * scalar;
+  var v = new THREE.Vector3(dx, dy, 0);
+  mesh.position.add(v);
+}
+
 function onDragEvent(event) {
   if (mesh) {
-    var scalar = 1 - event.dy / 80;
-    mesh.scale.multiplyScalar(scalar);
+    if (event.type === 'zoom') {
+      scale(event);
+    } else {
+      pan(event);
+    }
   }
 }
 
