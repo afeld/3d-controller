@@ -3,76 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>JS Bin</title>
-    <style>
-      body {
-        font-size: 3.5em;
-      }
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+    <link rel="stylesheet" href="/css/client.css"/>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
-
-      window.addEventListener('deviceorientation', function(event) {
-        var obj = {
-          alpha: event.alpha,
-          beta: event.beta,
-          gamma: event.gamma
-        };
-
-        document.body.innerHTML = '<pre><code>' + JSON.stringify(obj, null, 2) + '</code></pre>';
-        socket.emit('gyro', obj);
-      }, false);
-
-
-      var lastX = null;
-      var lastY = null;
-
-      var resetLast = function() {
-        lastX = null;
-        lastY = null;
-      };
-
-      document.addEventListener('touchend', resetLast, false);
-      resetLast();
-
-      var handleSingleDrag = function(touch){
-        if (lastX) {
-          var dx = touch.screenX - lastX;
-          var dy = touch.screenY - lastY;
-
-          // check if it actually moved
-          if (dx || dy) {
-            var drag = {
-              dx: dx,
-              dy: dy
-            };
-            socket.emit('drag', drag);
-          }
-        }
-      };
-
-      document.addEventListener('touchmove', function(event){
-        var touch = event.touches[0];
-        if (event.touches.length === 1) {
-          handleSingleDrag(touch);
-        } else {
-          console.log('multi');
-        }
-
-        lastX = touch.screenX;
-        lastY = touch.screenY;
-
-        // don't scroll
-        event.preventDefault();
-      }, false);
-    </script>
+    <script src="/js/client.js"></script>
   </head>
   <body>
-
   </body>
 </html>
