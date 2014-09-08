@@ -40,8 +40,7 @@
       document.addEventListener('touchend', resetLast, false);
       resetLast();
 
-      var handleSingleDrag = function(event){
-        var touch = event.touches[0];
+      var handleSingleDrag = function(touch){
         if (lastX) {
           var dx = touch.screenX - lastX;
           var dy = touch.screenY - lastY;
@@ -55,19 +54,19 @@
             socket.emit('drag', drag);
           }
         }
-
-        lastX = touch.screenX;
-        lastY = touch.screenY;
       };
 
       document.addEventListener('touchmove', function(event){
+        var touch = event.touches[0];
         if (event.touches.length === 1) {
-          handleSingleDrag(event);
+          handleSingleDrag(touch);
         } else {
           console.log('multi');
         }
 
-        lastTouchMove = event;
+        lastX = touch.screenX;
+        lastY = touch.screenY;
+
         // don't scroll
         event.preventDefault();
       }, false);
