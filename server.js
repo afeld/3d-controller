@@ -1,9 +1,19 @@
 var express = require('express');
 var app = express();
+var sass = require('node-sass');
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+
+app.use(sass.middleware({
+  src: __dirname + '/scss',
+  dest: __dirname + '/css',
+  debug: true,
+  prefix: '/css'
+}));
 app.use(express.static(__dirname));
+
 
 io.on('connection', function(socket){
   console.log('a user connected');

@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.8.8",
+    "node-sass": "^0.9.3",
     "socket.io": "^1.1.0"
   },
   "devDependencies": {},
