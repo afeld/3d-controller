@@ -1,3 +1,21 @@
+@mixin displayFlex {
+  display: -webkit-flex;
+  display: flex;
+}
+@mixin flex($val) {
+  -webkit-flex: $val;
+  flex: $val;
+}
+@mixin alignItems($val) {
+  -webkit-align-items: $val;
+  align-items: $val;
+}
+@mixin justifyContent($val) {
+  -webkit-justify-content: $val;
+  justify-content: $val;
+}
+
+
 html,
 body {
   width: 100%;
@@ -7,23 +25,23 @@ body {
 }
 body {
   font-size: 3.5em;
-  display: -webkit-flex;
-  display: flex;
+  @include displayFlex;
 }
 
-@mixin flex($val) {
-  -webkit-flex: $val;
-  flex: $val;
-}
 
+.column {
+  @include displayFlex;
+  @include alignItems(center);
+  @include justifyContent(center);
+  font-size: 400px;
+}
 .zoom {
   width: 30%;
   min-width: 180px;
-  background-color: blue;
+  background-color: #ACACAC;
   height: 100%;
 }
 .pan {
   @include flex(5 auto);
-  background-color: green;
   height: 100%;
 }
