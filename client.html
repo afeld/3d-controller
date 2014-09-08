@@ -7,6 +7,11 @@
       body {
         font-size: 3.5em;
       }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -24,32 +29,35 @@
       }, false);
 
 
-      var lastTouchMove = null;
+      var lastX = null;
+      var lastY = null;
 
-      document.addEventListener('touchend', function(event){
-        lastTouchMove = null;
-      }, false);
+      var resetLast = function() {
+        lastX = null;
+        lastY = null;
+      };
+
+      document.addEventListener('touchend', resetLast, false);
+      resetLast();
 
       var handleSingleDrag = function(event){
-        if (lastTouchMove) {
-          var lastTouch = lastTouchMove.touches[0];
-          var touch = event.touches[0];
+        var touch = event.touches[0];
+        if (lastX) {
+          var dx = touch.pageX - lastX;
+          var dy = touch.pageY - lastY;
 
-          // double-check that it's the same touch
-          if (lastTouch.identifier === touch.identifier) {
-            var dx = event.pageX - lastTouchMove.pageX;
-            var dy = event.pageY - lastTouchMove.pageY;
-
-            // check if it actually moved
-            if (dx || dy) {
-              var drag = {
-                dx: dx,
-                dy: dy
-              };
-              socket.emit('drag', drag);
-            }
+          // check if it actually moved
+          if (dx || dy) {
+            var drag = {
+              dx: dx,
+              dy: dy
+            };
+            socket.emit('drag', drag);
           }
         }
+
+        lastX = touch.pageX;
+        lastY = touch.pageY;
       };
 
       document.addEventListener('touchmove', function(event){
