@@ -26,6 +26,9 @@ body {
 body {
   font-size: 3.5em;
   @include displayFlex;
+  // disable text highlighting
+  // http://stackoverflow.com/a/923804/358804
+  -webkit-user-select: none;
 }
 
 
