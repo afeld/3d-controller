@@ -1,4 +1,5 @@
 var io = require('socket.io/node_modules/socket.io-client');
+require('./vendor/STLLoader');
 var DeviceOrientationControls = require('./DeviceOrientationControls');
 
 var container, stats;
