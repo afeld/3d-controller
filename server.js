@@ -1,11 +1,15 @@
 var express = require('express');
 var sass = require('node-sass');
 var browserify = require('browserify-middleware');
+var ip = require('ip');
 
 
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+
+var PORT = 3000;
 
 
 app.use('/js', browserify('./js'));
@@ -17,6 +21,13 @@ app.use(sass.middleware({
   prefix: '/css'
 }));
 app.use(express.static(__dirname));
+
+
+app.get('/viewer', function(req, res){
+  res.render('viewer.ejs', {
+    clientAddr: 'http://' + ip.address() + ':' + PORT + '/client.html'
+  });
+});
 
 
 io.on('connection', function(socket){
@@ -35,6 +46,6 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(3000, function(){
-  console.log('listening on *:3000');
+http.listen(PORT, function(){
+  console.log('listening on *:' + PORT);
 });
