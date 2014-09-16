@@ -9,7 +9,7 @@ npm install
 node server.js
 ```
 
-On your computer, open http://localhost:3000/viewer and follow the instructions.
+On your computer, open [http://localhost:3000/viewer](http://localhost:3000/viewer) and follow the instructions.
 
 ## Links
 
