@@ -1,10 +1,14 @@
 var express = require('express');
-var app = express();
 var sass = require('node-sass');
+var browserify = require('browserify-middleware');
 
+
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+
+app.use('/js', browserify('./client'));
 
 app.use(sass.middleware({
   src: __dirname + '/scss',

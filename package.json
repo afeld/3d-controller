@@ -2,6 +2,7 @@
   "name": "3d-controller",
   "private": true,
   "dependencies": {
+    "browserify-middleware": "^3.0.1",
     "express": "^4.8.8",
     "node-sass": "^0.9.3",
     "socket.io": "^1.1.0"

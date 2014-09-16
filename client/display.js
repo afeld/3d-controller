@@ -1,3 +1,5 @@
+var io = require('socket.io/node_modules/socket.io-client');
+
 var container, stats;
 
 var camera, scene, renderer, mesh, controls;
