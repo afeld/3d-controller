@@ -3,18 +3,17 @@
   <head>
     <title>Redirector</title>
     <script>
-      // http://stackoverflow.com/a/21117224/358804
-      var orientationEvent;
+      // based on http://stackoverflow.com/a/21117224/358804
       window.addEventListener('deviceorientation', function(event) {
-        orientationEvent = event;
-      }, false);
-
-      setTimeout(function(){
-        if (orientationEvent && typeof orientationEvent.alpha === 'number') {
+        if (typeof event.alpha === 'number') {
           window.location = 'controller';
         } else {
           window.location = 'viewer';
         }
+      }, false);
+
+      setTimeout(function(){
+        window.location = 'viewer';
       }, 200);
     </script>
   </head>
