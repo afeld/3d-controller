@@ -46,7 +46,7 @@ function init() {
   var texture = new THREE.Texture();
 
   var loader = new THREE.ImageLoader( manager );
-  loader.load( 'UV_Grid_Sm.jpg', function ( image ) {
+  loader.load( 'assets/UV_Grid_Sm.jpg', function ( image ) {
 
     texture.image = image;
     texture.needsUpdate = true;
@@ -77,7 +77,7 @@ function init() {
 
   } );
   // http://www.thingiverse.com/thing:331035/#files
-  loader.load( './Robot_Maker_Faire_65pc.stl' );
+  loader.load( './assets/Robot_Maker_Faire_65pc.stl' );
 
   //
 
