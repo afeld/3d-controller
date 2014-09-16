@@ -1,4 +1,5 @@
 var io = require('socket.io/node_modules/socket.io-client');
+var DeviceOrientationControls = require('./DeviceOrientationControls');
 
 var container, stats;
 
@@ -68,7 +69,7 @@ function init() {
     mesh.castShadow = true;
     mesh.receiveShadow = true;
 
-    controls = new THREE.DeviceOrientationControls(mesh);
+    controls = new DeviceOrientationControls(mesh);
     controls.connect();
 
     scene.add( mesh );

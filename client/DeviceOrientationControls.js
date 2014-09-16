@@ -6,7 +6,7 @@
  */
 var io = require('socket.io/node_modules/socket.io-client');
 
-THREE.DeviceOrientationControls = function ( object ) {
+var DeviceOrientationControls = function ( object ) {
 
 	var scope = this;
 
@@ -83,3 +83,6 @@ THREE.DeviceOrientationControls = function ( object ) {
 	};
 
 };
+
+
+module.exports = DeviceOrientationControls;
