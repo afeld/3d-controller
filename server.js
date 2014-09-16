@@ -23,13 +23,21 @@ app.use(sass.middleware({
 app.use(express.static(__dirname));
 
 
+var getOrigin = function() {
+  return ip.address() + ':' + PORT;
+};
+
+app.get('/', function(req, res){
+  res.render('redirector.ejs');
+});
+
 app.get('/controller', function(req, res){
   res.render('controller.ejs');
 });
 
 app.get('/viewer', function(req, res){
   res.render('viewer.ejs', {
-    controllerUrl: ip.address() + ':' + PORT + '/controller'
+    origin: getOrigin()
   });
 });
 

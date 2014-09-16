@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redirector</title>
+    <script>
+      // http://stackoverflow.com/a/21117224/358804
+      var orientationEvent;
+      window.addEventListener('deviceorientation', function(event) {
+        orientationEvent = event;
+      }, false);
+
+      setTimeout(function(){
+        if (orientationEvent && typeof orientationEvent.alpha === 'number') {
+          window.location = 'controller';
+        } else {
+          window.location = 'viewer';
+        }
+      }, 200);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
