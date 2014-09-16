@@ -8,7 +8,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 
-app.use('/js', browserify('./client'));
+app.use('/js', browserify('./js'));
 
 app.use(sass.middleware({
   src: __dirname + '/scss',
