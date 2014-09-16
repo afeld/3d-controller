@@ -29,7 +29,7 @@ app.get('/controller', function(req, res){
 
 app.get('/viewer', function(req, res){
   res.render('viewer.ejs', {
-    controllerUrl: 'http://' + ip.address() + ':' + PORT + '/controller'
+    controllerUrl: ip.address() + ':' + PORT + '/controller'
   });
 });
 
