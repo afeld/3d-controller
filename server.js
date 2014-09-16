@@ -23,9 +23,13 @@ app.use(sass.middleware({
 app.use(express.static(__dirname));
 
 
+app.get('/controller', function(req, res){
+  res.render('controller.ejs');
+});
+
 app.get('/viewer', function(req, res){
   res.render('viewer.ejs', {
-    clientAddr: 'http://' + ip.address() + ':' + PORT + '/client.html'
+    controllerUrl: 'http://' + ip.address() + ':' + PORT + '/controller'
   });
 });
 
