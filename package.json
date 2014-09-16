@@ -1,8 +1,6 @@
 {
   "name": "3d-controller",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
+  "private": true,
   "dependencies": {
     "express": "^4.8.8",
     "node-sass": "^0.9.3",
@@ -12,7 +10,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }
