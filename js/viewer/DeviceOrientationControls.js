@@ -4,7 +4,7 @@
  *
  * W3C Device Orientation control (http://w3c.github.io/deviceorientation/spec-source-orientation.html)
  */
-var io = require('socket.io/node_modules/socket.io-client');
+var socket = require('../shared/socket');
 
 var DeviceOrientationControls = function ( object ) {
 
@@ -18,8 +18,6 @@ var DeviceOrientationControls = function ( object ) {
 
 	this.deviceOrientation = {};
 	this.screenOrientation = 0;
-
-	var socket = io();
 
 	var onDeviceOrientationChangeEvent = function ( event ) {
 

@@ -1,4 +1,4 @@
-var io = require('socket.io/node_modules/socket.io-client');
+var socket = require('../shared/socket');
 var model = require('./model');
 var DeviceOrientationControls = require('./DeviceOrientationControls');
 
@@ -69,8 +69,6 @@ function init() {
   //
 
   window.addEventListener( 'resize', onWindowResize, false );
-
-  var socket = io();
   socket.on('drag', onDragEvent);
 
 }

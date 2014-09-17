@@ -1,5 +1,4 @@
-var io = require('socket.io/node_modules/socket.io-client');
-var socket = io();
+var socket = require('../shared/socket');
 
 
 var lastPosByTouchId;
