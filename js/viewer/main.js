@@ -1,1 +1,2 @@
+require('./instructions');
 require('./scene');
