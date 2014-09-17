@@ -2,6 +2,8 @@ var app = require('./lib/app');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
+require('./lib/routes');
+
 
 io.on('connection', function(socket){
   console.log('a user connected');
