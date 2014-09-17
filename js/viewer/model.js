@@ -18,7 +18,7 @@ var load = function(callback) {
     callback(mesh);
   });
   // http://www.thingiverse.com/thing:331035/#files
-  loader.load('./assets/Robot_Maker_Faire_65pc.stl');
+  loader.load('./models/Robot_Maker_Faire_65pc.stl');
 };
 
 
