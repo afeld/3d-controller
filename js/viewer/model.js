@@ -25,7 +25,7 @@ var centerCentroid = function(geometry) {
 
 var scaleToFit = function(mesh) {
   var boxSize = getBoxSize(mesh.geometry.boundingBox);
-  var sizeScalar = 150 / boxSize;
+  var sizeScalar = 200 / boxSize;
   mesh.scale.set( sizeScalar, sizeScalar, sizeScalar );
 };
 
