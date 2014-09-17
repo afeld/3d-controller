@@ -5,16 +5,18 @@ var io = require('socket.io')(server);
 require('./lib/routes');
 
 
+var pipe = function(socket, channel) {
+  socket.on(channel, function(msg) {
+    socket.broadcast.emit(channel, msg);
+  });
+};
+
+
 io.on('connection', function(socket){
   console.log('a user connected');
 
-  socket.on('gyro', function(msg){
-    socket.broadcast.emit('gyro', msg);
-  });
-
-  socket.on('drag', function(msg){
-    socket.broadcast.emit('drag', msg);
-  });
+  pipe(socket, 'gyro');
+  pipe(socket, 'drag');
 
   socket.on('disconnect', function(){
     console.log('user disconnected');
