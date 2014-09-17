@@ -23,15 +23,24 @@ var centerCentroid = function(geometry) {
   geometry.applyMatrix(translation);
 };
 
-var placeInCenter = function(mesh) {
-  mesh.geometry.computeBoundingBox();
-
-  var offset = new THREE.Vector3(0, -1, -1);
-  mesh.position.copy(offset);
-
+var scaleToFit = function(mesh) {
   var boxSize = getBoxSize(mesh.geometry.boundingBox);
   var sizeScalar = 150 / boxSize;
   mesh.scale.set( sizeScalar, sizeScalar, sizeScalar );
+};
+
+var placeInFrontOfCamera = function(mesh) {
+  var offset = new THREE.Vector3(0, -1, -1);
+  mesh.position.copy(offset);
+}
+
+var setInitialPlacement = function(mesh) {
+  var geometry = mesh.geometry;
+  geometry.computeBoundingBox();
+
+  centerCentroid(geometry);
+  placeInFrontOfCamera(mesh);
+  scaleToFit(mesh);
 
   mesh.rotation.set( - Math.PI / 2, 0, 0 );
 };
@@ -44,9 +53,8 @@ var load = function(callback) {
   loader.addEventListener('load', function(event) {
     var geometry = event.content;
 
-    centerCentroid(geometry);
     var mesh = new THREE.Mesh(geometry, material);
-    placeInCenter(mesh);
+    setInitialPlacement(mesh);
 
     mesh.castShadow = true;
     mesh.receiveShadow = true;
