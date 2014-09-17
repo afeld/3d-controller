@@ -15,12 +15,18 @@ var getBoxSize = function(boundingBox) {
   return sizeVector.length();
 };
 
+var centerCentroid = function(geometry) {
+  geometry.computeBoundingBox();
+  var centroid = getCentroid(geometry.boundingBox);
+  var translation = new THREE.Matrix4();
+  translation.makeTranslation( - centroid.x, - centroid.y, - centroid.z );
+  geometry.applyMatrix(translation);
+};
+
 var placeInCenter = function(mesh) {
   mesh.geometry.computeBoundingBox();
 
   var offset = new THREE.Vector3(0, -1, -1);
-  var centroid = getCentroid(mesh.geometry.boundingBox);
-  offset.add(centroid);
   mesh.position.copy(offset);
 
   var boxSize = getBoxSize(mesh.geometry.boundingBox);
@@ -37,6 +43,8 @@ var load = function(callback) {
   var loader = new THREE.STLLoader();
   loader.addEventListener('load', function(event) {
     var geometry = event.content;
+
+    centerCentroid(geometry);
     var mesh = new THREE.Mesh(geometry, material);
     placeInCenter(mesh);
 
