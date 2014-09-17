@@ -1,45 +1,6 @@
-var express = require('express');
-var sass = require('node-sass');
-var browserify = require('browserify-middleware');
-var ip = require('ip');
-
-
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
-
-var PORT = 3000;
-
-
-app.use('/js', browserify('./js'));
-
-app.use(sass.middleware({
-  src: __dirname + '/scss',
-  dest: __dirname + '/css',
-  debug: true,
-  prefix: '/css'
-}));
-app.use(express.static(__dirname));
-
-
-var getOrigin = function() {
-  return ip.address() + ':' + PORT;
-};
-
-app.get('/', function(req, res){
-  res.render('redirector.ejs');
-});
-
-app.get('/controller', function(req, res){
-  res.render('controller.ejs');
-});
-
-app.get('/viewer', function(req, res){
-  res.render('viewer.ejs', {
-    origin: getOrigin()
-  });
-});
+var app = require('./lib/app');
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 
 io.on('connection', function(socket){
@@ -58,6 +19,8 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(PORT, function(){
+
+var PORT = 3000;
+server.listen(PORT, function(){
   console.log('listening on *:' + PORT);
 });
