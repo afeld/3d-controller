@@ -15,6 +15,7 @@ var getBoxSize = function(boundingBox) {
   return sizeVector.length();
 };
 
+// http://stackoverflow.com/a/12749570/358804
 var centerCentroid = function(geometry) {
   geometry.computeBoundingBox();
   var centroid = getCentroid(geometry.boundingBox);
@@ -25,8 +26,8 @@ var centerCentroid = function(geometry) {
 
 var scaleToFit = function(mesh) {
   var boxSize = getBoxSize(mesh.geometry.boundingBox);
-  var sizeScalar = 200 / boxSize;
-  mesh.scale.set( sizeScalar, sizeScalar, sizeScalar );
+  var scale = 200 / boxSize;
+  mesh.scale.set(scale, scale, scale);
 };
 
 var placeInFrontOfCamera = function(mesh) {
