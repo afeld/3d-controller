@@ -17,8 +17,12 @@ var load = function(callback) {
 
     callback(mesh);
   });
-  // http://www.thingiverse.com/thing:331035/#files
-  loader.load('./models/Robot_Maker_Faire_65pc.stl');
+
+  // http://www.thingiverse.com/thing:19104
+  loader.load('./models/bigmakerbottable4.stl');
+
+  // http://www.thingiverse.com/thing:331035
+  // loader.load('./models/Robot_Maker_Faire_65pc.stl');
 };
 
 
