@@ -15,5 +15,5 @@ socket.on('gyro', function() {
   timeout = setTimeout(function() {
     $info.fadeIn();
     timeout = null;
-  }, 200);
+  }, 500);
 });
