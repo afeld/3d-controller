@@ -5,13 +5,22 @@ body {
   margin: 0px;
   overflow: hidden;
 }
-#info {
+.header {
   color: #fff;
   position: absolute;
   top: 10px;
   width: 100%;
   text-align: center;
   z-index: 100;
-  display:block;
+
+  li {
+    display: inline;
+  }
 }
-#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+.header a,
+.button {
+  color: #f00;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
