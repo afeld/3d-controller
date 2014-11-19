@@ -4,14 +4,14 @@ var socket = require('../shared/socket');
 var lastPosByTouchId;
 
 var resetLast = function() {
-  lastPosByTouchId = {}
+  lastPosByTouchId = {};
 };
 
 var $doc = $(document);
 $doc.on('touchend', resetLast);
 resetLast();
 
-var handleDrag = function(touch, type){
+var handleDrag = function(touch, type) {
   var lastPos = lastPosByTouchId[touch.identifier];
   if (lastPos) {
     var dx = touch.screenX - lastPos.x;
@@ -30,11 +30,11 @@ var handleDrag = function(touch, type){
 };
 
 
-$(function(){
+$(function() {
   // assume zoom area is full height on the left hand side of the screen
   var zoomWidth = $('.zoom').width();
 
-  $doc.on('touchmove', function(event){
+  $doc.on('touchmove', function(event) {
     $.each(event.originalEvent.changedTouches, function(i, touch) {
       // check which area this event happened in
       if (touch.clientX > zoomWidth) {

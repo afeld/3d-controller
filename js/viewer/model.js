@@ -33,7 +33,7 @@ var scaleToFit = function(mesh) {
 var placeInFrontOfCamera = function(mesh) {
   var offset = new THREE.Vector3(0, -1, -1);
   mesh.position.copy(offset);
-}
+};
 
 var setInitialPlacement = function(mesh) {
   var geometry = mesh.geometry;

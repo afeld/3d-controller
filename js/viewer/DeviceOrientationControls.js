@@ -47,7 +47,7 @@ var DeviceOrientationControls = function ( object ) {
 
 			quaternion.multiply( q0.setFromAxisAngle( zee, - orient ) );    // adjust for screen orientation
 
-		}
+		};
 
 	}();
 
