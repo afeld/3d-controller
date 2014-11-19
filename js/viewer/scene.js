@@ -6,23 +6,14 @@ var container, stats;
 
 var camera, scene, renderer, mesh, controls;
 
-init();
-animate();
 
-
-function init() {
-
-  container = document.createElement( 'div' );
-  document.body.appendChild( container );
-
+function createCamera() {
   camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
   camera.position.y = 150;
   camera.position.z = 250;
+}
 
-  // scene
-
-  scene = new THREE.Scene();
-
+function addLighting() {
   var ambient = new THREE.AmbientLight( 0x777777 );
   scene.add( ambient );
 
@@ -33,9 +24,9 @@ function init() {
   var directionalLight2 = new THREE.DirectionalLight( 0xffeedd );
   directionalLight2.position.set( 0, 1, 0 );
   scene.add( directionalLight2 );
+}
 
-  // texture
-
+function loadTexture() {
   var manager = new THREE.LoadingManager();
   manager.onProgress = function ( item, loaded, total ) {
     console.log( item, loaded, total );
@@ -48,9 +39,9 @@ function init() {
     texture.image = image;
     texture.needsUpdate = true;
   } );
+}
 
-  // model
-
+function initializeModel() {
   var $spinner = $('.loader');
   var loadModel = function(name) {
     $spinner.show();
@@ -78,27 +69,36 @@ function init() {
     var name = window.location.hash.replace(/^#/, '');
     loadModel(name);
   });
+}
 
-  //
-
+function setupRenderer() {
   renderer = new THREE.WebGLRenderer();
   renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );
+}
 
-  //
+function init() {
+  container = document.createElement( 'div' );
+  document.body.appendChild( container );
+
+  createCamera();
+
+  scene = new THREE.Scene();
+
+  addLighting();
+  loadTexture();
+  initializeModel();
+  setupRenderer();
 
   window.addEventListener( 'resize', onWindowResize, false );
   socket.on('drag', onDragEvent);
-
 }
 
 function onWindowResize() {
-
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
   renderer.setSize( window.innerWidth, window.innerHeight );
-
 }
 
 function scale(event) {
@@ -131,20 +131,21 @@ function onDragEvent(event) {
 //
 
 function animate() {
-
   requestAnimationFrame( animate );
   render();
-
 }
 
 function render() {
-
   if (controls) {
     controls.update();
   }
 
   camera.lookAt( scene.position );
-
   renderer.render( scene, camera );
-
 }
+
+
+module.exports = {
+  init: init,
+  animate: animate
+};

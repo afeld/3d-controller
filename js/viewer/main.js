@@ -1,2 +1,5 @@
 require('./instructions');
-require('./scene');
+var scene = require('./scene');
+
+scene.init();
+scene.animate();
