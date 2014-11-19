@@ -2,20 +2,13 @@ var socket = require('../shared/socket');
 var model = require('./model');
 var DeviceOrientationControls = require('./DeviceOrientationControls');
 
-var container, stats;
+var container = require('./objects/container');
+var camera = require('./objects/camera');
+var scene = require('./objects/scene');
+var renderer = require('./objects/renderer');
 
-var camera, scene, renderer, mesh, controls;
+var mesh, controls;
 
-
-function createCamera() {
-  camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-  camera.position.y = 150;
-  camera.position.z = 250;
-}
-
-function createScene() {
-  scene = new THREE.Scene();
-}
 
 function addLighting() {
   var ambient = new THREE.AmbientLight( 0x777777 );
@@ -76,17 +69,12 @@ function initializeModel() {
 }
 
 function setupRenderer() {
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
   container.appendChild( renderer.domElement );
 }
 
 function init() {
-  container = document.createElement( 'div' );
   document.body.appendChild( container );
 
-  createCamera();
-  createScene();
   addLighting();
   loadTexture();
   initializeModel();
