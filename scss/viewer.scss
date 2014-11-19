@@ -1,3 +1,5 @@
+@import "./loader";
+
 body {
   font-family: Monospace;
   background-color: #000;
@@ -5,13 +7,43 @@ body {
   margin: 0px;
   overflow: hidden;
 }
-#info {
+
+.header {
   color: #fff;
   position: absolute;
   top: 10px;
   width: 100%;
   text-align: center;
   z-index: 100;
-  display:block;
+
+  ul {
+    padding: 0;
+  }
+
+  ul,
+  li {
+    display: inline;
+  }
 }
-#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+
+.row {
+  margin-bottom: 10px;
+}
+
+.header a,
+.button {
+  color: #f00;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.loader {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -5em;
+  margin-left: -5em;
+  z-index: 1;
+}

@@ -51,13 +51,32 @@ function init() {
 
   // model
 
-  model.load(function(m){
-    mesh = m;
+  var $spinner = $('.loader');
+  var loadModel = function(name) {
+    $spinner.show();
 
-    controls = new DeviceOrientationControls(mesh);
-    controls.connect();
+    model.load(name, function(m){
+      var oldMesh = mesh;
+      mesh = m;
 
-    scene.add( mesh );
+      controls = new DeviceOrientationControls(mesh);
+      controls.connect();
+
+      if (oldMesh) {
+        scene.remove(oldMesh);
+      }
+      scene.add( mesh );
+
+      $spinner.hide();
+    });
+  };
+
+  var initialModel = $('.models li:first').text();
+  loadModel(initialModel);
+
+  $(window).on('hashchange', function() {
+    var name = window.location.hash.replace(/^#/, '');
+    loadModel(name);
   });
 
   //

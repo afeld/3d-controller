@@ -49,7 +49,7 @@ var setInitialPlacement = function(mesh) {
 
 var material = new THREE.MeshPhongMaterial( { ambient: 0x555555, color: 0xAAAAAA, specular: 0x111111, shininess: 200 } );
 
-var load = function(callback) {
+var load = function(name, callback) {
   var loader = new THREE.STLLoader();
   loader.addEventListener('load', function(event) {
     var geometry = event.content;
@@ -63,11 +63,7 @@ var load = function(callback) {
     callback(mesh);
   });
 
-  // http://www.thingiverse.com/thing:19104
-  loader.load('./models/bigmakerbottable4.stl');
-
-  // http://www.thingiverse.com/thing:331035
-  // loader.load('./models/Robot_Maker_Faire_65pc.stl');
+  loader.load('./models/' + name + '.stl');
 };
 
 
