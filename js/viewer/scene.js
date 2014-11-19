@@ -13,6 +13,10 @@ function createCamera() {
   camera.position.z = 250;
 }
 
+function createScene() {
+  scene = new THREE.Scene();
+}
+
 function addLighting() {
   var ambient = new THREE.AmbientLight( 0x777777 );
   scene.add( ambient );
@@ -82,9 +86,7 @@ function init() {
   document.body.appendChild( container );
 
   createCamera();
-
-  scene = new THREE.Scene();
-
+  createScene();
   addLighting();
   loadTexture();
   initializeModel();
