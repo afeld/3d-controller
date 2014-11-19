@@ -51,7 +51,9 @@ function init() {
 
   // model
 
+  var $spinner = $('.loader');
   $(window).on('hashchange', function() {
+    $spinner.show();
     var name = window.location.hash.replace(/^#/, '');
 
     model.load(name, function(m){
@@ -65,6 +67,8 @@ function init() {
         scene.remove(oldMesh);
       }
       scene.add( mesh );
+
+      $spinner.hide();
     });
   });
 
