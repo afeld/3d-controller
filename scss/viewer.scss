@@ -5,6 +5,7 @@ body {
   margin: 0px;
   overflow: hidden;
 }
+
 .header {
   color: #fff;
   position: absolute;
@@ -13,10 +14,20 @@ body {
   text-align: center;
   z-index: 100;
 
+  ul {
+    padding: 0;
+  }
+
+  ul,
   li {
     display: inline;
   }
 }
+
+.row {
+  margin-bottom: 10px;
+}
+
 .header a,
 .button {
   color: #f00;
