@@ -9,7 +9,7 @@ npm install
 node server.js
 ```
 
-On your computer, open [http://localhost:3000/viewer](http://localhost:3000/viewer) and follow the instructions.
+On your computer, open [http://localhost:3000/viewer](http://localhost:3000/viewer) and follow the instructions. To add new models, just drag the `.stl` files into [`models/`](models/).
 
 ## Links
 
