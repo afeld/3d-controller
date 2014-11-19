@@ -1,5 +1,5 @@
 require('./instructions');
-var scene = require('./scene');
+var sceneManager = require('./sceneManager');
 
-scene.init();
-scene.animate();
+sceneManager.init();
+sceneManager.animate();

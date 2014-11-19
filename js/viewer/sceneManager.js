@@ -2,10 +2,10 @@ var socket = require('../shared/socket');
 var model = require('./model');
 var DeviceOrientationControls = require('./DeviceOrientationControls');
 
-var container = require('./objects/container');
-var camera = require('./objects/camera');
-var scene = require('./objects/scene');
-var renderer = require('./objects/renderer');
+var container = require('./singletons/container');
+var camera = require('./singletons/camera');
+var scene = require('./singletons/scene');
+var renderer = require('./singletons/renderer');
 
 var mesh, controls;
 
