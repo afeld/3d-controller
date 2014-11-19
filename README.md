@@ -18,4 +18,5 @@ On your computer, open [http://localhost:3000/viewer](http://localhost:3000/view
 ## Credits
 
 * [bigmakerbottable4.stl](http://www.thingiverse.com/thing:19104)
+* [groot.stl](http://www.thingiverse.com/thing:478806)
 * [Robot_Maker_Faire_65pc](http://www.thingiverse.com/thing:331035)
