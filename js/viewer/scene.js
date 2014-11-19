@@ -51,13 +51,21 @@ function init() {
 
   // model
 
-  model.load(function(m){
-    mesh = m;
+  $(window).on('hashchange', function() {
+    var name = window.location.hash.replace(/^#/, '');
 
-    controls = new DeviceOrientationControls(mesh);
-    controls.connect();
+    model.load(name, function(m){
+      var oldMesh = mesh;
+      mesh = m;
 
-    scene.add( mesh );
+      controls = new DeviceOrientationControls(mesh);
+      controls.connect();
+
+      if (oldMesh) {
+        scene.remove(oldMesh);
+      }
+      scene.add( mesh );
+    });
   });
 
   //
