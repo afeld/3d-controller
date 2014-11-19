@@ -23,21 +23,6 @@ function addLighting() {
   scene.add( directionalLight2 );
 }
 
-function loadTexture() {
-  var manager = new THREE.LoadingManager();
-  manager.onProgress = function ( item, loaded, total ) {
-    console.log( item, loaded, total );
-  };
-
-  var texture = new THREE.Texture();
-
-  var loader = new THREE.ImageLoader( manager );
-  loader.load( 'assets/UV_Grid_Sm.jpg', function ( image ) {
-    texture.image = image;
-    texture.needsUpdate = true;
-  } );
-}
-
 function initializeModel() {
   var $spinner = $('.loader');
   var loadModel = function(name) {
@@ -76,7 +61,6 @@ function init() {
   document.body.appendChild( container );
 
   addLighting();
-  loadTexture();
   initializeModel();
   setupRenderer();
 
