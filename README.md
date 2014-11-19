@@ -14,3 +14,8 @@ On your computer, open [http://localhost:3000/viewer](http://localhost:3000/view
 ## Links
 
 * http://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
+
+## Credits
+
+* [bigmakerbottable4.stl](http://www.thingiverse.com/thing:19104)
+* [Robot_Maker_Faire_65pc](http://www.thingiverse.com/thing:331035)
