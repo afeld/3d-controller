@@ -52,9 +52,8 @@ function init() {
   // model
 
   var $spinner = $('.loader');
-  $(window).on('hashchange', function() {
+  var loadModel = function(name) {
     $spinner.show();
-    var name = window.location.hash.replace(/^#/, '');
 
     model.load(name, function(m){
       var oldMesh = mesh;
@@ -70,6 +69,14 @@ function init() {
 
       $spinner.hide();
     });
+  };
+
+  var initialModel = $('.models li:first').text();
+  loadModel(initialModel);
+
+  $(window).on('hashchange', function() {
+    var name = window.location.hash.replace(/^#/, '');
+    loadModel(name);
   });
 
   //
