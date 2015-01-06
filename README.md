@@ -13,6 +13,7 @@ On your computer, open [http://localhost:3000/viewer](http://localhost:3000/view
 
 ## Links
 
+* https://www.hakkalabs.co/articles/3d-gestural-interfaces-for-mobile (a talk I gave about this project)
 * http://mobiforge.com/design-development/html5-mobile-web-device-orientation-events
 
 ## Credits
