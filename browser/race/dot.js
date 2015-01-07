@@ -1,5 +1,4 @@
-var CANVAS_WIDTH = window.innerWidth;
-var CANVAS_HEIGHT = window.innerHeight;
+var canvas = require('./canvas');
 
 
 var Dot = function() {
@@ -15,16 +14,16 @@ Dot.prototype.updatePosition = function() {
 
   // if a wall is hit, re-enter from opposite position
   if (dx < 0) {
-    dx = CANVAS_WIDTH;
-    dy = CANVAS_HEIGHT - dy;
-  } else if (dx > CANVAS_WIDTH) {
+    dx = canvas.el.width;
+    dy = canvas.el.height - dy;
+  } else if (dx > canvas.el.width) {
     dx = 0;
-    dy = CANVAS_HEIGHT - dy;
+    dy = canvas.el.height - dy;
   } else if (dy < 0) {
-    dx = CANVAS_WIDTH - dx;
-    dy = CANVAS_HEIGHT;
-  } else if (dy > CANVAS_HEIGHT) {
-    dx = CANVAS_WIDTH - dx;
+    dx = canvas.el.width - dx;
+    dy = canvas.el.height;
+  } else if (dy > canvas.el.height) {
+    dx = canvas.el.width - dx;
     dy = 0;
   }
 

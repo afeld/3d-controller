@@ -1,18 +1,13 @@
 // http://www.growingwiththeweb.com/2012/10/creating-trail-effect-with-canvas.html
 
 var socket = require('../shared/socket');
+var canvas = require('./canvas');
 var Dot = require('./dot');
 
-var CANVAS_WIDTH = window.innerWidth;
-var CANVAS_HEIGHT = window.innerHeight;
-
-var canvas;
-var context;
+var context = canvas.context;
 var dot;
 var rotation;
 
-
-init();
 
 socket.on('gyro', function(event) {
   rotation = event.alpha;
@@ -25,16 +20,6 @@ socket.on('gyro', function(event) {
   dot.direction = -2.5 * degreesToRadians(rotation);
 });
 
-function init() {
-  canvas = document.getElementById('canvas');
-
-  if (canvas && canvas.getContext) {
-    context = canvas.getContext('2d');
-    canvas.width = CANVAS_WIDTH;
-    canvas.height = CANVAS_HEIGHT;
-  }
-}
-
 function degreesToRadians(deg) {
   return deg / 180 * 2 * Math.PI;
 }
@@ -44,7 +29,7 @@ function loop() {
 
   // Draw over the whole canvas to create the trail effect
   context.fillStyle = 'rgba(255, 255, 255, .05)';
-  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillRect(0, 0, canvas.el.width, canvas.el.height);
 
   // Draw the dot
   context.beginPath();
