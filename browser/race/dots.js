@@ -3,11 +3,17 @@ var Dot = require('./dot');
 var dotsById = {};
 
 
+function values(obj) {
+  var keys = Object.keys(obj);
+  return keys.map(function(key) {
+    return obj[key];
+  });
+}
+
+
 module.exports = {
   all: function() {
-    return this.ids().map(function(id) {
-      return dotsById[id];
-    });
+    return values(dotsById);
   },
 
   findOrCreate: function(id) {
@@ -17,9 +23,5 @@ module.exports = {
       dotsById[id] = dot;
     }
     return dot;
-  },
-
-  ids: function() {
-    return Object.keys(dotsById);
   }
 };
