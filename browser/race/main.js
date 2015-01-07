@@ -2,19 +2,23 @@
 
 var socket = require('../shared/socket');
 var canvas = require('./canvas');
+var Dot = require('./dot');
 var dots = require('./dots');
 
 var ROTATION_SCALAR = 2.5;
 var SPEED_SCALAR = 0.05;
+var JITTER_SCALAR = 3;
 
 
 loop();
 
 
 socket.on('drag', function(evt) {
+  var dot = dots.findOrCreate(evt.sessionId);
   if (evt.type === 'zoom') {
-    var dot = dots.findOrCreate(evt.sessionId);
     dot.speed += -1 * SPEED_SCALAR * evt.dy;
+  } else {
+    jitter(dot, evt);
   }
 });
 
@@ -26,6 +30,13 @@ socket.on('gyro', function(evt) {
 
 function degreesToRadians(deg) {
   return deg / 180 * 2 * Math.PI;
+}
+
+function jitter(dot, dragEvent) {
+  var newDot = new Dot();
+  newDot.x = dot.x + (dragEvent.dx * JITTER_SCALAR);
+  newDot.y = dot.y + (dragEvent.dy * JITTER_SCALAR);
+  canvas.drawDot(newDot);
 }
 
 function loop() {
