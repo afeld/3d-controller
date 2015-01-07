@@ -1,15 +1,11 @@
-var CANVAS_WIDTH = window.innerWidth;
-var CANVAS_HEIGHT = window.innerHeight;
-
-
-var canvas = document.getElementById('canvas');
-var context = canvas.getContext('2d');
-canvas.width = CANVAS_WIDTH;
-canvas.height = CANVAS_HEIGHT;
+var el = document.getElementById('canvas');
+var context = el.getContext('2d');
+el.width = window.innerWidth;
+el.height = window.innerHeight;
 
 
 module.exports = {
-  el: canvas,
+  el: el,
   context: context,
 
   drawDot: function(dot) {
@@ -23,6 +19,6 @@ module.exports = {
   fade: function() {
     // Draw over the whole canvas to create the trail effect
     context.fillStyle = 'rgba(255, 255, 255, .05)';
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillRect(0, 0, el.width, el.height);
   }
 };
