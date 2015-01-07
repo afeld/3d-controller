@@ -41,6 +41,10 @@ function createTrail() {
   }
 }
 
+function degreesToRadians(deg) {
+  return deg / 180 * 2 * Math.PI;
+}
+
 function updatePosition() {
   var dx = dot.x + dot.speed * Math.cos(dot.direction);
   var dy = dot.y + dot.speed * Math.sin(dot.direction);
@@ -53,8 +57,7 @@ function updatePosition() {
     dot.y = dy;
 
     if (rotation) {
-      var dirRadians = (rotation) / -180 * 2 * Math.PI;
-      dot.direction = dirRadians;
+      dot.direction = -1 * degreesToRadians(rotation);
     }
   }
 }
