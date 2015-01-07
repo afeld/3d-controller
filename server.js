@@ -1,8 +1,8 @@
-var app = require('./lib/app');
+var app = require('./server/app');
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-require('./lib/routes');
+require('./server/routes');
 
 
 var broadcastAll = function(socket, channel) {

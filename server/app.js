@@ -4,7 +4,7 @@ var browserify = require('browserify-middleware');
 
 var app = express();
 
-app.use('/js', browserify('./js'));
+app.use('/browser', browserify('./browser'));
 
 app.use(sass.middleware({
   src: process.cwd() + '/scss',
