@@ -5,26 +5,37 @@ var canvas = require('./canvas');
 var Dot = require('./dot');
 
 var ROTATION_SCALAR = 2.5;
-var dot;
+var dots = {};
 
 
-socket.on('gyro', function(event) {
+loop();
+
+socket.on('gyro', function(evt) {
+  var dot = findOrCreateDot(evt.sessionId);
+  dot.direction = -1 * ROTATION_SCALAR * degreesToRadians(evt.alpha);
+});
+
+function findOrCreateDot(sessionId) {
+  var dot = dots[sessionId];
   if (!dot) {
     dot = new Dot();
-    loop();
+    dots[sessionId] = dot;
   }
-
-  dot.direction = -1 * ROTATION_SCALAR * degreesToRadians(event.alpha);
-});
+  return dot;
+}
 
 function degreesToRadians(deg) {
   return deg / 180 * 2 * Math.PI;
 }
 
 function loop() {
-  dot.updatePosition();
-  canvas.fade()
-  canvas.drawDot(dot);
+  canvas.fade();
+
+  Object.keys(dots).forEach(function(sessionId) {
+    var dot = dots[sessionId];
+    dot.updatePosition();
+    canvas.drawDot(dot);
+  });
 
   window.requestAnimationFrame(loop);
 }
