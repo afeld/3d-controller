@@ -30,8 +30,8 @@ app.get('/models', function(req, res){
   });
 });
 
-app.get('/race', function(req, res){
-  res.render('race.ejs', {
+app.get('/trails', function(req, res){
+  res.render('trails.ejs', {
     origin: getOrigin(req)
   });
 });
