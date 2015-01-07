@@ -5,8 +5,6 @@ var socket = require('../shared/socket');
 var CANVAS_WIDTH = window.innerWidth;
 var CANVAS_HEIGHT = window.innerHeight;
 
-var FPS = 60;
-
 var canvas;
 var context;
 var dot;
@@ -20,7 +18,7 @@ socket.on('gyro', function(event) {
 
   if (!dot) {
     createTrail();
-    setInterval(loop, 1000 / FPS);
+    window.requestAnimationFrame(loop);
   }
 });
 
@@ -87,4 +85,6 @@ function loop() {
   context.moveTo(dot.x, dot.y);
   context.arc(dot.x, dot.y, 3, 0, Math.PI*2, true);
   context.fill();
+
+  window.requestAnimationFrame(loop);
 }
