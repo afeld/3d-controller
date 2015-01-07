@@ -1,0 +1,24 @@
+@import "./_header";
+
+body {
+  font-family: Monospace;
+  margin: 0;
+}
+
+li {
+  float: left;
+  font-size: 2em;
+  margin-left: 4em;
+
+  &:first-child {
+    margin-left: 2em;
+  }
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

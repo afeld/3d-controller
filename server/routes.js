@@ -29,3 +29,9 @@ app.get('/viewer', function(req, res){
     origin: getOrigin(req)
   });
 });
+
+app.get('/race', function(req, res){
+  res.render('race.ejs', {
+    origin: getOrigin(req)
+  });
+});

@@ -1,4 +1,5 @@
-@import "./loader";
+@import "./_header";
+@import "./_loader";
 
 body {
   font-family: Monospace;
@@ -8,13 +9,12 @@ body {
   overflow: hidden;
 }
 
+.row {
+  margin-bottom: 10px;
+}
+
 .header {
   color: #fff;
-  position: absolute;
-  top: 10px;
-  width: 100%;
-  text-align: center;
-  z-index: 100;
 
   ul {
     padding: 0;
@@ -24,18 +24,12 @@ body {
   li {
     display: inline;
   }
-}
 
-.row {
-  margin-bottom: 10px;
-}
-
-.header a,
-.button {
-  color: #f00;
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration: underline;
+  a {
+    color: #f00;
+    font-weight: bold;
+    text-decoration: underline;
+  }
 }
 
 .loader {
