@@ -12,7 +12,7 @@ node server.js
 There are two different viewers – open one in your browser and follow the instructions.
 
 * **2D racer**: [http://localhost:3000/racer](http://localhost:3000/racer)
-* **3D model viewer**: [http://localhost:3000/viewer](http://localhost:3000/viewer)
+* **3D model viewer**: [http://localhost:3000/models](http://localhost:3000/models)
     * To add new models, drag `.stl` files into [`models/`](models/) and refresh the page.
 
 ## Links

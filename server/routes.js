@@ -23,8 +23,8 @@ app.get('/controller', function(req, res){
   res.render('controller.ejs');
 });
 
-app.get('/viewer', function(req, res){
-  res.render('viewer.ejs', {
+app.get('/models', function(req, res){
+  res.render('models.ejs', {
     models: models.getList(),
     origin: getOrigin(req)
   });
