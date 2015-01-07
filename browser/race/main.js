@@ -2,27 +2,18 @@
 
 var socket = require('../shared/socket');
 var canvas = require('./canvas');
-var Dot = require('./dot');
+var dots = require('./dots');
 
 var ROTATION_SCALAR = 2.5;
-var dots = {};
 
 
 loop();
 
 socket.on('gyro', function(evt) {
-  var dot = findOrCreateDot(evt.sessionId);
+  var dot = dots.findOrCreate(evt.sessionId);
   dot.direction = -1 * ROTATION_SCALAR * degreesToRadians(evt.alpha);
 });
 
-function findOrCreateDot(sessionId) {
-  var dot = dots[sessionId];
-  if (!dot) {
-    dot = new Dot();
-    dots[sessionId] = dot;
-  }
-  return dot;
-}
 
 function degreesToRadians(deg) {
   return deg / 180 * 2 * Math.PI;
@@ -31,8 +22,7 @@ function degreesToRadians(deg) {
 function loop() {
   canvas.fade();
 
-  Object.keys(dots).forEach(function(sessionId) {
-    var dot = dots[sessionId];
+  dots.all().forEach(function(dot) {
     dot.updatePosition();
     canvas.drawDot(dot);
   });
