@@ -1,4 +1,4 @@
-# 3D Model Mobile Controller
+# Demo: The Phone as a Gestural Interface
 
 ## Usage
 
@@ -9,7 +9,11 @@ npm install
 node server.js
 ```
 
-On your computer, open [http://localhost:3000/viewer](http://localhost:3000/viewer) and follow the instructions. To add new models, just drag the `.stl` files into [`models/`](models/) and refresh the page.
+There are two different viewers – open one in your browser and follow the instructions.
+
+* **2D racer**: [http://localhost:3000/racer](http://localhost:3000/racer)
+* **3D model viewer**: [http://localhost:3000/viewer](http://localhost:3000/viewer)
+    * To add new models, drag `.stl` files into [`models/`](models/) and refresh the page.
 
 ## Links
 
