@@ -4,20 +4,17 @@ var socket = require('../shared/socket');
 var canvas = require('./canvas');
 var Dot = require('./dot');
 
-var context = canvas.context;
+var ROTATION_SCALAR = 2.5;
 var dot;
-var rotation;
 
 
 socket.on('gyro', function(event) {
-  rotation = event.alpha;
-
   if (!dot) {
     dot = new Dot();
     loop();
   }
 
-  dot.direction = -2.5 * degreesToRadians(rotation);
+  dot.direction = -1 * ROTATION_SCALAR * degreesToRadians(event.alpha);
 });
 
 function degreesToRadians(deg) {
@@ -26,17 +23,8 @@ function degreesToRadians(deg) {
 
 function loop() {
   dot.updatePosition();
-
-  // Draw over the whole canvas to create the trail effect
-  context.fillStyle = 'rgba(255, 255, 255, .05)';
-  context.fillRect(0, 0, canvas.el.width, canvas.el.height);
-
-  // Draw the dot
-  context.beginPath();
-  context.fillStyle = '#ff0000';
-  context.moveTo(dot.x, dot.y);
-  context.arc(dot.x, dot.y, 3, 0, Math.PI*2, true);
-  context.fill();
+  canvas.fade()
+  canvas.drawDot(dot);
 
   window.requestAnimationFrame(loop);
 }
