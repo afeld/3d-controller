@@ -18,6 +18,7 @@ module.exports = {
 
   fade: function() {
     // Draw over the whole canvas to create the trail effect
+    // http://www.growingwiththeweb.com/2012/10/creating-trail-effect-with-canvas.html
     context.fillStyle = 'rgba(255, 255, 255, .05)';
     context.fillRect(0, 0, el.width, el.height);
   }

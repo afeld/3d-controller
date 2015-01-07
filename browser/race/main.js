@@ -1,5 +1,3 @@
-// http://www.growingwiththeweb.com/2012/10/creating-trail-effect-with-canvas.html
-
 var canvas = require('./canvas');
 var dots = require('./dots');
 var listener = require('./listener');
