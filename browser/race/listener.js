@@ -20,19 +20,22 @@ function jitter(dot, dragEvent) {
   canvas.drawDot(newDot);
 }
 
+var onDragEvent = function(evt) {
+  var dot = dots.findOrCreate(evt.sessionId);
+  if (evt.type === 'zoom') {
+    dot.speed += -1 * SPEED_SCALAR * evt.dy;
+  } else {
+    jitter(dot, evt);
+  }
+};
+
+var onGyroEvent = function(evt) {
+  var dot = dots.findOrCreate(evt.sessionId);
+  dot.direction = -1 * ROTATION_SCALAR * degreesToRadians(evt.alpha);
+};
+
 
 exports.start = function() {
-  socket.on('drag', function(evt) {
-    var dot = dots.findOrCreate(evt.sessionId);
-    if (evt.type === 'zoom') {
-      dot.speed += -1 * SPEED_SCALAR * evt.dy;
-    } else {
-      jitter(dot, evt);
-    }
-  });
-
-  socket.on('gyro', function(evt) {
-    var dot = dots.findOrCreate(evt.sessionId);
-    dot.direction = -1 * ROTATION_SCALAR * degreesToRadians(evt.alpha);
-  });
+  socket.on('drag', onDragEvent);
+  socket.on('gyro', onGyroEvent);
 };
