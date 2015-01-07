@@ -1,11 +1,18 @@
 var canvas = require('./canvas');
 
 
+var generateRandomColor = function() {
+  // http://www.paulirish.com/2009/random-hex-color-code-snippets/
+  return '#'+Math.floor(Math.random()*16777215).toString(16);
+};
+
+
 var Dot = function() {
   this.x = 100;
   this.y = 100;
   this.speed = 3;
   this.direction = Math.PI * 2 * Math.random();
+  this.color = generateRandomColor();
 };
 
 Dot.prototype.updatePosition = function() {

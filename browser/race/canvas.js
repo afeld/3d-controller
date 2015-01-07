@@ -14,7 +14,7 @@ module.exports = {
 
   drawDot: function(dot) {
     context.beginPath();
-    context.fillStyle = '#ff0000';
+    context.fillStyle = dot.color;
     context.moveTo(dot.x, dot.y);
     context.arc(dot.x, dot.y, 3, 0, Math.PI*2, true);
     context.fill();
