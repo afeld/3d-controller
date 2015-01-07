@@ -5,11 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link rel="stylesheet" href="/css/race.css"/>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   </head>
   <body>
     <div class="header">
-      1. <a href="http://osxdaily.com/2013/10/14/lock-orientation-ios-7-screen-rotation/" target="_blank">Turn on orientation lock</a> 2. Visit <a href="http://<%= origin %>" target="_blank"><%= origin %></a>
+      <ol>
+        <li>
+          <a href="http://osxdaily.com/2013/10/14/lock-orientation-ios-7-screen-rotation/" target="_blank">Turn on orientation lock</a>
+        </li>
+        <li>
+          Visit <a href="http://<%= origin %>" target="_blank"><%= origin %></a>
+        </li>
+      </ol>
     </div>
     <canvas id="canvas"></canvas>
     <script src="/browser/race/main.js"></script>

@@ -16,8 +16,19 @@ body {
 .header {
   color: #fff;
 
+  ul {
+    padding: 0;
+  }
+
+  ul,
+  li {
+    display: inline;
+  }
+
   a {
     color: #f00;
+    font-weight: bold;
+    text-decoration: underline;
   }
 }
 
