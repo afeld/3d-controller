@@ -63,7 +63,7 @@ var load = function(name, callback) {
     callback(mesh);
   });
 
-  loader.load('./models/' + name + '.stl');
+  loader.load('/models/' + name + '.stl');
 };
 
 

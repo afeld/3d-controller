@@ -44,7 +44,7 @@ function initializeModel() {
     });
   };
 
-  var initialModel = $('.models li:first').text();
+  var initialModel = $('.models li:first').text().trim();
   loadModel(initialModel);
 
   $(window).on('hashchange', function() {
