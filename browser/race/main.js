@@ -24,6 +24,7 @@ function loop() {
 
   dots.all().forEach(function(dot) {
     dot.updatePosition();
+    dot.teleportIfOutsideBoundary(canvas.el.width, canvas.el.height);
     canvas.drawDot(dot);
   });
 

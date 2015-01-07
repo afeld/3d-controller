@@ -1,6 +1,3 @@
-var canvas = require('./canvas');
-
-
 var generateRandomColor = function() {
   // http://www.paulirish.com/2009/random-hex-color-code-snippets/
   return '#'+Math.floor(Math.random()*16777215).toString(16);
@@ -15,27 +12,32 @@ var Dot = function() {
   this.color = generateRandomColor();
 };
 
-Dot.prototype.updatePosition = function() {
-  var dx = this.x + this.speed * Math.cos(this.direction);
-  var dy = this.y + this.speed * Math.sin(this.direction);
+Dot.prototype.teleportIfOutsideBoundary = function(width, height) {
+  var dx = this.x;
+  var dy = this.y;
 
   // if a wall is hit, re-enter from opposite position
   if (dx < 0) {
-    dx = canvas.el.width;
-    dy = canvas.el.height - dy;
-  } else if (dx > canvas.el.width) {
+    dx = width;
+    dy = height - dy;
+  } else if (dx > width) {
     dx = 0;
-    dy = canvas.el.height - dy;
+    dy = height - dy;
   } else if (dy < 0) {
-    dx = canvas.el.width - dx;
-    dy = canvas.el.height;
-  } else if (dy > canvas.el.height) {
-    dx = canvas.el.width - dx;
+    dx = width - dx;
+    dy = height;
+  } else if (dy > height) {
+    dx = width - dx;
     dy = 0;
   }
 
   this.x = dx;
   this.y = dy;
+};
+
+Dot.prototype.updatePosition = function() {
+  this.x = this.x + this.speed * Math.cos(this.direction);
+  this.y = this.y + this.speed * Math.sin(this.direction);
 };
 
 
