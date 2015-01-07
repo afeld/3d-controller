@@ -20,11 +20,11 @@ app.get('/', function(req, res){
 });
 
 app.get('/controller', function(req, res){
-  res.render('controller.ejs');
+  res.render('3d/controller.ejs');
 });
 
 app.get('/viewer', function(req, res){
-  res.render('viewer.ejs', {
+  res.render('3d/viewer.ejs', {
     models: models.getList(),
     origin: getOrigin(req)
   });
