@@ -6,6 +6,7 @@ var CANVAS_WIDTH = window.innerWidth;
 var CANVAS_HEIGHT = window.innerHeight;
 
 var FPS = 60;
+var MARGIN = 50;
 
 var canvas;
 var context;
@@ -56,7 +57,7 @@ function updatePosition() {
     dot.x = dx;
     dot.y = dy;
 
-    if (rotation) {
+    if (rotation && dx > MARGIN && dx < (CANVAS_WIDTH - MARGIN) && dy > MARGIN && dy < (CANVAS_HEIGHT - MARGIN)) {
       dot.direction = -1 * degreesToRadians(rotation);
     }
   }
