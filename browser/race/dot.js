@@ -16,7 +16,7 @@ Dot.prototype.teleportIfOutsideBoundary = function(width, height) {
   var dx = this.x;
   var dy = this.y;
 
-  // if a wall is hit, re-enter from opposite position
+  // if the edge is hit, re-enter from opposite position
   if (dx < 0) {
     dx = width;
     dy = height - dy;
