@@ -12,6 +12,15 @@ var $doc = $(document);
 $doc.on('touchend', resetLast);
 resetLast();
 
+var emitDrag = function(type, dx, dy) {
+  var drag = {
+    dx: dx,
+    dy: dy,
+    type: type
+  };
+  socket.emit('drag', drag);
+};
+
 var handleDrag = function(touch, type) {
   var lastPos = lastPosByTouchId[touch.identifier];
   if (lastPos) {
@@ -20,12 +29,7 @@ var handleDrag = function(touch, type) {
 
     // check if it actually moved
     if (dx || dy) {
-      var drag = {
-        dx: dx,
-        dy: dy,
-        type: type
-      };
-      socket.emit('drag', drag);
+      emitDrag(type, dx, dy);
     }
   }
 };
