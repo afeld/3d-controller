@@ -6,7 +6,6 @@ var CANVAS_WIDTH = window.innerWidth;
 var CANVAS_HEIGHT = window.innerHeight;
 
 var FPS = 60;
-var MARGIN = 50;
 
 var canvas;
 var context;
@@ -39,7 +38,7 @@ function createTrail() {
     y: 100,
     speed: 3,
     direction: Math.PI * 2 * Math.random()
-  }
+  };
 }
 
 function degreesToRadians(deg) {
@@ -51,15 +50,15 @@ function updatePosition() {
   var dy = dot.y + dot.speed * Math.sin(dot.direction);
 
   if (dx < 0 || dx > CANVAS_WIDTH || dy < 0 || dy > CANVAS_HEIGHT) {
-    dot.direction = Math.PI * 2 * Math.random();
-    updatePosition();
-  } else {
-    dot.x = dx;
-    dot.y = dy;
+    dx = CANVAS_WIDTH / 2;
+    dy = CANVAS_HEIGHT / 2;
+  }
 
-    if (rotation && dx > MARGIN && dx < (CANVAS_WIDTH - MARGIN) && dy > MARGIN && dy < (CANVAS_HEIGHT - MARGIN)) {
-      dot.direction = -1 * degreesToRadians(rotation);
-    }
+  dot.x = dx;
+  dot.y = dy;
+
+  if (rotation) {
+    dot.direction = -1 * degreesToRadians(rotation);
   }
 }
 
