@@ -12,11 +12,17 @@ var context;
 var dot;
 var rotation;
 
-socket.on('gyro', function(event) {
-  rotation = event.alpha;
-});
 
 init();
+
+socket.on('gyro', function(event) {
+  rotation = event.alpha;
+
+  if (!dot) {
+    createTrail();
+    setInterval(loop, 1000 / FPS);
+  }
+});
 
 function init() {
   canvas = document.getElementById('canvas');
@@ -25,10 +31,6 @@ function init() {
     context = canvas.getContext('2d');
     canvas.width = CANVAS_WIDTH;
     canvas.height = CANVAS_HEIGHT;
-
-    createTrail();
-
-    setInterval(loop, 1000 / FPS);
   }
 }
 
@@ -68,7 +70,7 @@ function updatePosition() {
   dot.y = dy;
 
   if (rotation) {
-    dot.direction = -1 * degreesToRadians(rotation);
+    dot.direction = -2.5 * degreesToRadians(rotation);
   }
 }
 
