@@ -1,5 +1,7 @@
 // http://www.growingwiththeweb.com/2012/10/creating-trail-effect-with-canvas.html
 
+var socket = require('../shared/socket');
+
 var CANVAS_WIDTH = window.innerWidth;
 var CANVAS_HEIGHT = window.innerHeight;
 
@@ -8,6 +10,11 @@ var FPS = 60;
 var canvas;
 var context;
 var dot;
+var rotation;
+
+socket.on('gyro', function(event) {
+  rotation = event.alpha;
+});
 
 init();
 
@@ -44,6 +51,11 @@ function updatePosition() {
   } else {
     dot.x = dx;
     dot.y = dy;
+
+    if (rotation) {
+      var dirRadians = (rotation) / -180 * 2 * Math.PI;
+      dot.direction = dirRadians;
+    }
   }
 }
 
