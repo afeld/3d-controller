@@ -49,9 +49,19 @@ function updatePosition() {
   var dx = dot.x + dot.speed * Math.cos(dot.direction);
   var dy = dot.y + dot.speed * Math.sin(dot.direction);
 
-  if (dx < 0 || dx > CANVAS_WIDTH || dy < 0 || dy > CANVAS_HEIGHT) {
-    dx = CANVAS_WIDTH / 2;
-    dy = CANVAS_HEIGHT / 2;
+  // if a wall is hit, re-enter from opposite position
+  if (dx < 0) {
+    dx = CANVAS_WIDTH;
+    dy = CANVAS_HEIGHT - dy;
+  } else if (dx > CANVAS_WIDTH) {
+    dx = 0;
+    dy = CANVAS_HEIGHT - dy;
+  } else if (dy < 0) {
+    dx = CANVAS_WIDTH - dx;
+    dy = CANVAS_HEIGHT;
+  } else if (dy > CANVAS_HEIGHT) {
+    dx = CANVAS_WIDTH - dx;
+    dy = 0;
   }
 
   dot.x = dx;
