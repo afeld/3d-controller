@@ -5,9 +5,18 @@ var canvas = require('./canvas');
 var dots = require('./dots');
 
 var ROTATION_SCALAR = 2.5;
+var SPEED_SCALAR = 0.05;
 
 
 loop();
+
+
+socket.on('drag', function(evt) {
+  if (evt.type === 'zoom') {
+    var dot = dots.findOrCreate(evt.sessionId);
+    dot.speed += -1 * SPEED_SCALAR * evt.dy;
+  }
+});
 
 socket.on('gyro', function(evt) {
   var dot = dots.findOrCreate(evt.sessionId);
