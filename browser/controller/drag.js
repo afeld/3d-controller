@@ -35,7 +35,7 @@ var handleDrag = function(touch, type) {
 };
 
 var dispatchTouchEvents = function(touches) {
-  touches.forEach(function(touch) {
+  $.each(touches, function(i, touch) {
     // check which area this event happened in
     if (touch.clientX > zoomWidth) {
       handleDrag(touch, 'pan');
@@ -46,7 +46,7 @@ var dispatchTouchEvents = function(touches) {
 };
 
 var recordTouchPositions = function(touches) {
-  touches.forEach(function(touch) {
+  $.each(touches, function(i, touch) {
     lastPosByTouchId[touch.identifier] = {
       x: touch.screenX,
       y: touch.screenY
